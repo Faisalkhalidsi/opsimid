@@ -7,14 +7,12 @@ var table = $('#table_hotel').dataTable( {
         "bLengthChange" : false,
         "ajax": '{{ site_url() }}/hotel/ajax_data/getrecord_hotel',
         "columns": [
-                { "data": "hotel_name" },                
+                { "data": "hotel_name" },              
                 { "data": "hotel_type" },
-                { "data": "hotel_id" },
-                { "data": "star" },                
-                { "data": "contact_person" },
-                { "data": "address" },
+                { "data": "star" },
+                { "data": "address" },                
                 { "data": "telp" },
-                { "data": "state" },
+                { "data": "email" },
                 { "mRender" : function ( data, type, full ) {
                     FullData = full;
                     return '{{ BUTTON_CRUD }} ';

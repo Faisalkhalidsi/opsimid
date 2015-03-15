@@ -6,7 +6,7 @@ class Hotel_rate extends CI_Controller {
         parent::__construct();
         $this->load->library('menu');
         $this->load->model('user_mdl');
-        $this->load->model('model_hotel_rate');
+        $this->load->model('hotel_rate_mdl');
 
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
@@ -40,7 +40,7 @@ class Hotel_rate extends CI_Controller {
     {
         $data = array();   
         
-        $form_builder = $this->model_hotel_rate->get_form_view();
+        $form_builder = $this->hotel_rate_mdl->get_form_view();
         
         $this->twiggy->set('form_builder', $form_builder);
         // create content page form hotel rate

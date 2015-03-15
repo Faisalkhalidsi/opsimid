@@ -17,22 +17,35 @@ class reservation_mdl extends CI_Model {
     function getdatalist() {
         $data = array();
 
-        $query = $this->db->query("SELECT a.book_code, c.full_name, b.code_tour
+        $query = $this->db->query("SELECT a.book_code, c.full_name, b.tour_code
             FROM tour_mst_booking a
             JOIN tour_mst_quotation b ON b.quotation_id=a.quotation_id
             JOIN mst_customer c ON c.customer_id=a.customer_id
             ORDER BY c.full_name ASC");
         $result = $query->result();
-        
-        $nomor = 1; 
+
+        $nomor = 1;
         foreach ($result as $row):
             $data[] = array(
                 'nomor' => $nomor,
                 'book_code' => $row->book_code,
                 'full_name' => $row->full_name,
-                'code_tour' => $row->code_tour,
+                'tour_code' => $row->tour_code,
             );
             $nomor++;
+        endforeach;
+        return $data;
+    }
+
+    function getdataTypeHeadAjax($keyword) {
+        $data = array();
+        $query = $this->db->query("SELECT * FROM tour_mst_quotation WHERE tour_code LIKE '%" . $keyword . "%' ORDER BY `tour_code` ASC ");
+        $result = $query->result();
+
+        foreach ($result as $row):
+            $data[] = array(
+                'tour_code' => $row->tour_code,
+            );
         endforeach;
         return $data;
     }

@@ -6,7 +6,7 @@ class Hotel extends CI_Controller {
         parent::__construct();
         $this->load->library('menu');
         $this->load->model('user_mdl');
-        $this->load->model('form_mdl');
+        $this->load->model('hotel_mdl');
 
         $menu = $this->menu->set_menu();
         $this->twiggy->set('menu_navigasi', $menu);
@@ -58,11 +58,26 @@ class Hotel extends CI_Controller {
         
         $button_crud = $this->twiggy->template('button/btn_edit')->render();         
         $button_crud .= $this->twiggy->template('button/btn_del')->render();
+
+        $script_page = $this->twiggy->template('script/script_all')->render();
+        $this->twiggy->set('SCRIPTS', $script_page);
+
         $this->twiggy->set('BUTTON_CRUD', $button_crud);
         $output = $this->twiggy->template('dashboard')->render();
         $this->output->set_output($output);
     }
 
     function save()
-    {}
+    {
+        $params = (object) $this->input->post();   
+        
+        $valid = $this->hotel_mdl->save($params);
+        echo $this->db->last_query();
+        
+        die();
+        if (empty($valid))
+            $this->owner->alert("Please complete the form", "../index.php/hotel/hotel/form");
+        else
+            redirect("../index.php/hotel/hotel/index");
+    }
  }

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Model_hotel_rate extends Form_mdl {
+class hotel_rate_mdl extends Form_mdl {
     function __construct() {
         parent::__construct();
         $this->table_base = 'hotel_mst_hotel_rate';
